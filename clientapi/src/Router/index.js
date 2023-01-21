@@ -9,7 +9,11 @@ export default function AppRouter() {
             <Router>
                
                 <Routes>
-                    <Route path='/' element={<ProjectDashboard />}></Route>
+                    <Route path='/' element={<Signup />}></Route>
+                </Routes>
+
+                <Routes>
+                    <Route path='/dashboard' element={<ProjectDashboard />}></Route>
                 </Routes>
               
                
