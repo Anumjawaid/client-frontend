@@ -28,8 +28,8 @@ export default function Signup() {
    
 
     const [userdata, setUserdata] = useState({
-        fname: "",
-        lname: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: ""
     })
@@ -71,12 +71,11 @@ export default function Signup() {
         <Grid>
         <LayoutStateForm
                 step='step #01'
-                b1={[{ "label1": "First Name", onChange: mapUser, value: userdata.fname, name: 'fname' }, { "label2": "Last Name", onChange: (e) => mapUser(e), value: userdata.lname, name: 'lname' }]}
+                b1={[{ "label1": "First Name", onChange: mapUser, value: userdata.fname, name: 'firstName' }, { "label2": "Last Name", onChange: (e) => mapUser(e), value: userdata.lname, name: 'lastName' }]}
                 b2={[{ "label": "Email", onChange: (e) => mapUser(e), value: userdata.email, name: 'email' }]}
                 b3={[{ "label": "Password", onChange: (e) => mapUser(e), value: userdata.password, name: 'password' }]}
                 b4={[{ 'label': 'Signup', onClick: () => RegisterUser() }]}
             />
-            <h3>dffsds</h3>
                 </Grid>
 
           

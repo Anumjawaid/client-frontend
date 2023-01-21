@@ -52,7 +52,7 @@ export const userSlice=createSlice({
         },
         [addUser.fulfilled]:(state,action)=>{
             console.log(state,"fullfilled from in ADDUSER")
-            state.responses=action.payload.index
+            state.responses=action.payload.message
         },
         [readUser.rejected]:(state,action)=>{
             console.log(state,"Got rejected from Getting user in ADDUSER")
