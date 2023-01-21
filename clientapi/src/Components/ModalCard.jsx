@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import cardImage from '../Components/images/pakistani.png'
 const style = {
   position: 'absolute',
  
@@ -78,46 +78,5 @@ export default function BasicModal() {
 
 
 
-
-// function DetailedInfo(props){
-// return(
-// 	<div className="whole-details-area" style={{color:"white"}}>
-// 		<h4>Weather Details</h4>
-// 		<Table className="weather-details" style={{color:"white"}}>
-// 			<TableBody>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>High Temperature</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{props.obj.high}&deg;</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Low Temperature</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{props.obj.low}&deg;</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Humidity</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{props.obj.humidity}%</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Wind Speed</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{props.obj.windSpeed}</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Sunrise</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{moment.unix(props.obj.sunrise).format('h:mA')}</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Sunset</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{moment.unix(props.obj.sunset).format('h:mA')}</TableCell>
-// 				</TableRow>
-// 				<TableRow>
-// 					<TableCell style={{color:"white"}}>Date</TableCell>
-// 					<TableCell className="cell-data" style={{color:"white"}}>{moment.unix(props.obj.time).format('ddd, h:mA')}</TableCell>
-// 				</TableRow>
-// 			</TableBody>
-// 		</Table>
-// 	</div>
-// );
-// }
-// export default DetailedInfo;
   
 

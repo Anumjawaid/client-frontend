@@ -10,49 +10,107 @@ import Grid from '@mui/material/Grid'
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-// import ModalCard from './ModalCard'
+import ModalCard from './ModalCard'
+import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
+
 function CurrentWeather(props) {
 	const temp = props.obj.temp
 	const description = props.obj.description
 	const city = props.obj.city
 	const iconId = props.obj.iconId
 
+	const card = ['1', '2', '3', '4', '5']
+
+	function temperatureClass() {
+		let temp = this.convertTemperature();
+		if (temp >= 100) {
+			this.setState({
+				temperatureClass: 'boiling'
+			});
+		}
+		if (temp < 100 && temp >= 85) {
+			this.setState({
+				temperatureClass: 'hot'
+			});
+		}
+		if (temp < 85 && temp >= 65) {
+			this.setState({
+				temperatureClass: 'warm'
+			});
+		}
+		if (temp < 65 && temp >= 50) {
+			this.setState({
+				temperatureClass: 'perfect'
+			});
+		}
+		if (temp < 50 && temp >= 32) {
+			this.setState({
+				temperatureClass: 'cool'
+			});
+		}
+		if (temp < 32) {
+			this.setState({
+				temperatureClass: 'freezing'
+			});
+		}
+	}
+	
 	return (
 		<>
 			<Box >
-				<Grid container rowSpacing={1}>
-					<Grid item xs={2} md={2} lg={3.5} sx={{ ml: 2 }} >
-						{/* <Item> */}
-						<Card sx={{ maxWidth: 345 }}>
-							<CardMedia
-								sx={{ height: 140 }}
-								image={cardImage}
-								title="green iguana"
-							/>
-							<CardContent>
+				<Box
+					component="form"
+					sx={{
+						'& > :not(style)': { m: 1, width: '25ch' },
+					}}
+					noValidate
+					autoComplete="off"
+				>
+					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }} ><TextField id="outlined-basic" label="Enter City Name" variant="outlined" sx={{background:'white'}} /><AddIcon /></div>
 
-								<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-									<p>{iconId}</p>
-								</Typography>
-								<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-									<p>{Math.round(temp)}</p>
-								</Typography>
-								<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-									<p>{description}</p>
-								</Typography>
-								<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-									<p>{city}</p>
-								</Typography>
-							</CardContent>
-							<CardActions>
-								{/* <ModalCard /> */}
+				</Box>
+				<Grid container rowSpacing={6}>
+					{card.map((card) => {
+						return (
+							<>
+								<Grid item xs={2} md={2} lg={3.5} sx={{ ml: 2 }} key={card} >
+									<Card sx={{ maxWidth: 345 }}>
+										<CardMedia
+											sx={{ height: 140 }}
+											image={cardImage}
+											title="green iguana"
+											
+										/>
+										<CardContent>
 
-							</CardActions>
-						</Card>
-						{/* </Item> */}
-					</Grid>
+											<Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+												<p>{iconId}</p>
+											</Typography>
+											<Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+												<p>{Math.round(temp)}</p>
+											</Typography>
+											<Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+												<p>{description}</p>
+											</Typography>
+											<Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+												<p>{city}</p>
+											</Typography>
+										</CardContent>
+										<CardActions>
+											<ModalCard />
+
+										</CardActions>
+									</Card>
+								</Grid>
+							</>
+						)
+					})}
+
+
 				</Grid>
 			</Box>
 		</>
 	)
+				
 } export default CurrentWeather;
