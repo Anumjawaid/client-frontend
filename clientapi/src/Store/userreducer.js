@@ -2,8 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     isLoggedIn:null,
-    userinfo:{},
-    WeatherArr:[],
+    userinfo:{
+        firstName:"",
+        lastName: "",
+        email: "",
+        password: "",
+        
+    },
+    cities:[],
     responses:"responses"
 
 }
@@ -80,6 +86,9 @@ export const userSlice=createSlice({
         [addUser.fulfilled]:(state,action)=>{
             console.log(state,"fullfilled from in ADDUSER")
             state.responses=action.payload.message
+            state.userinfo=action.payload.result
+            state.isLoggedIn=action.payload.result._id
+            state.cities=action.payload.result.cities
         },
         [readUser.rejected]:(state,action)=>{
             console.log(state,"Got rejected from Getting user in ADDUSER")
