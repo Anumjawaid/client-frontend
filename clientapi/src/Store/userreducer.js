@@ -10,6 +10,7 @@ const initialState={
         
     },
     cities:[],
+    currentCities:{},
     responses:"responses"
 
 }
@@ -54,19 +55,7 @@ export const getWeather=createAsyncThunk(
         return res.json();
     }
 )
-export const getUserDashboard=createAsyncThunk(
-    'getUserDashboard',
-    async(data,thunkApi)=>{
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
-        const res = await fetch('http://localhost:3001/getUserDashboard',requestOptions)
-        // console.log(res,"response")
-        return res.json();
-    }
-)
+
 export const userSlice=createSlice({
     name:'user',
     initialState,
@@ -102,10 +91,11 @@ export const userSlice=createSlice({
         [getWeather.fulfilled]:(state,action)=>{
             console.log(action.payload,"Weather of a city")
             state.responses=action.payload.message
-            state.WeatherArr=action.payload
+            state.currentCities=action.payload.weather
+            console.log(action.payload.weather)
         },
         [getWeather.rejected]:(state,action)=>{
-            console.log(state,"Got rejected from Getting user in ADDUSER")
+            console.log(state,"Got rejected from Getting Weather")
         }
         
     }

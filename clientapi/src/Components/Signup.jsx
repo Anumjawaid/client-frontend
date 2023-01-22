@@ -49,7 +49,7 @@ export default function Signup() {
     const RegisterUser = () => {
         console.log("Register User", userdata)
         dispatch(addUser({ data: userdata }))
-        // navigate('/login')
+         navigate('/udashboard')
 
         //  *******************************This part doesnot work because of callback queue****************************
 

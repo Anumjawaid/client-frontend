@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useDispatch, useSelector } from "react-redux"
+import { getWeather} from '../Store/userreducer'
 
 const style = {
   position: 'absolute',
@@ -22,7 +24,13 @@ const style = {
 
 export default function BasicModal() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const dispatch = useDispatch()
+  const currentCities = useSelector((state) => state.users.currentCities)
+  console.log(currentCities,"sddssad")
+  const handleOpen = () => {
+    dispatch(getWeather({ q: "karachi" }))
+    setOpen(true);
+  }
   const handleClose = () => setOpen(false);
 
   return (
@@ -40,7 +48,7 @@ export default function BasicModal() {
           </Typography>
 
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          <p style={{textAlign:'center'}}>City Name:</p>
+          <p style={{textAlign:'center'}}>City Name:{currentCities.location.Name}</p>
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
         <p style={{textAlign:'center'}}>Temprature:</p>
