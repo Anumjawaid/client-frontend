@@ -1,4 +1,4 @@
-import React ,{useEffect}from 'react';
+import React ,{useEffect,useState}from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -17,13 +17,16 @@ import { useSelector ,useDispatch} from "react-redux"
 import { AccordionDetails } from '@mui/material';
 import { findByLabelText } from '@testing-library/react';
 import { FilledButton } from './helper';
-import { getWeather} from '../Store/userreducer'
+import { getWeather,addCity} from '../Store/userreducer'
 import {  useNavigate } from 'react-router'
+import { OutlinedInput1 } from './helper';
 
 function CurrentWeather() {
 	const dispatch = useDispatch()
-	 const card = useSelector((state) => state.users.cities)
+	const card = useSelector((state) => state.users.cities)
+	const [CityName,setCityName]=useState("")
 	 const currentCities = useSelector((state) => state.users.currentCities)
+	 const isLoggedIn = useSelector((state) => state.users.isLoggedIn)
 	 
 	 useEffect(()=>{
 		console.log(currentCities,"fdgfdg")
@@ -45,12 +48,15 @@ function CurrentWeather() {
 	//const card = ['1', '2', '3', '4', '5']
 	let change=()=>{
 		console.log("change")
-		dispatch(getWeather({ q: "karachi" }))
+		
 		
 		
 	}
 
-	
+	const handleClick=()=>{
+		dispatch(addCity({data:{"_id":isLoggedIn, city:CityName }}))
+		alert("abc")
+	}
 
 	return (
 		<>
@@ -63,7 +69,10 @@ function CurrentWeather() {
 					noValidate
 					autoComplete="off"
 				>
-					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }} ><TextField id="outlined-basic" label="Enter City Name" variant="outlined" sx={{background:'white'}} /><AddIcon /></div>
+					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }} >
+						<OutlinedInput1  calls={'not'} label={"Add City Here"} style={{ width: '100%',marginBottom:'20px',color:'white' }} placeholder={"City Here"} onChange={(e)=>setCityName(e.target.value)} name={CityName}>
+							</OutlinedInput1><AddIcon style={{marginTop:'40px'}}onClick={handleClick}/>
+						</div>
 
 				</Box>
 				<Grid container rowSpacing={6}>
@@ -96,7 +105,7 @@ function CurrentWeather() {
 								</Typography>
 							</CardContent>
 							<CardActions>
-							<FilledButton name={"View"} fn={(e)=>change(e)}/>
+							<FilledButton name={"View"} fn={()=>dispatch(getWeather({ q: card.Name }))}/>
 							</CardActions>
 						</Card>
 					</Grid>

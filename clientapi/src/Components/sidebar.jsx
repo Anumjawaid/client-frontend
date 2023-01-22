@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState,useEffect} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -12,16 +12,15 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
+import { useSelector, useDispatch } from "react-redux";
 // import GroupIcon from '@material-ui/icons/Group';
 // import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import logo from '../UI/logo.png'
 // import './App.css'
 import { Grid } from '@mui/material';
+import { getWeather,addCity} from '../Store/userreducer'
+import {  useNavigate } from 'react-router'
 
-const listval=[
-    {text:"User",icon:<GroupIcon />,path:"/userdashboard"},
-    {text:"Task",icon:<GroupIcon />,path:"/taskboard"},
-]
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -77,7 +76,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
-    background:'#e67e22',
+    background: '#e67e22',
     boxSizing: 'border-box',
     ...(open && {
       ...openedMixin(theme),
@@ -91,23 +90,46 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer(props) {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const listval = [
+  
+  ]
+  const card = useSelector((state) => state.users.cities)
+  const currentCities = useSelector((state) => state.users.currentCities)
+  console.log(card, "card")
+  card.map((v, i) => {
+    console.log(v,"dd")
+    listval.push( { text: v.Name, icon: <GroupIcon />, path: "/userdashboard" })
+})
+const theme = useTheme();
+const [open, setOpen] = React.useState(false);
+useEffect(()=>{
+  console.log(currentCities,"fdgfdg")
+  if(Object.keys(currentCities).length !=0){
+    console.log("Not zero")
+    navigate('/weather')
+  }
+  else{
+    console.log("Not zeddfdro")
+  }
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  },[currentCities])
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+const handleDrawerOpen = () => {
+  setOpen(true);
+};
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-        <Box>
+const handleDrawerClose = () => {
+  setOpen(false);
+};
+
+return (
+  <Box sx={{ display: 'flex' }}>
+    <Box>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar style={{backgroundColor:'#1A1D20'}}>
+        <Toolbar style={{ backgroundColor: '#1A1D20' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -118,30 +140,30 @@ export default function MiniDrawer(props) {
               ...(open && { display: 'none' }),
             }}
           >
-            <img src={logo} style={{width:'50px',height:'50px'}} />
+            <img src={logo} style={{ width: '50px', height: '50px' }} />
           </IconButton>
-          
+
         </Toolbar>
       </AppBar>
-      <Drawer  PaperProps={{
-    sx: {
-      backgroundColor: "#E1A100",
-      color: "white",
-    }
-  }} variant="permanent" open={open} >
-      
+      <Drawer PaperProps={{
+        sx: {
+          backgroundColor: "#E1A100",
+          color: "white",
+        }
+      }} variant="permanent" open={open} >
+
         <DrawerHeader>
-        <p style={{position:'absolute',left:'5%',fontWeight:'bolder',fontSize:'21px'}}>Neptune</p>
+          <p style={{ position: 'absolute', left: '5%', fontWeight: 'bolder', fontSize: '21px' }}>Neptune</p>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (<img src={logo} style={{width:'50px',height:'50px'}} />):  (<img src={logo} style={{width:'50px',height:'50px'}} />)}
+            {theme.direction === 'rtl' ? (<img src={logo} style={{ width: '50px', height: '50px' }} />) : (<img src={logo} style={{ width: '50px', height: '50px' }} />)}
           </IconButton>
-         
-         
+
+
         </DrawerHeader>
         {/* <Divider /> */}
-        <List    sx={{
-                marginTop:'5rem',
-              }}>
+        <List sx={{
+          marginTop: '5rem',
+        }}>
           {listval.map((text, index) => (
             <ListItemButton
               key={text.text}
@@ -149,21 +171,22 @@ export default function MiniDrawer(props) {
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
-                backgroundColor:'#23282D',
-                marginBottom:'2rem',
-                borderRadius:'10px',
-                width:'80%',
-                marginLeft:'0.5rem'
+                backgroundColor: '#23282D',
+                marginBottom: '2rem',
+                borderRadius: '10px',
+                width: '80%',
+                marginLeft: '0.5rem'
               }}
-              href={text.path}
+              // href={text.path}
+              onClick={()=>dispatch(getWeather({ q: text.text }))}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
-                  
-                  color:'white'
+
+                  color: 'white'
                 }}
               >
                 {text.icon}
@@ -172,54 +195,56 @@ export default function MiniDrawer(props) {
             </ListItemButton>
           ))}
 
-<ListItemButton
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+              backgroundColor: '#23282D',
+              marginTop: '18rem',
+              borderRadius: '10px',
+              width: '80%',
+              marginLeft: '0.5rem'
+            }}
+          >
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-                backgroundColor:'#23282D',
-                marginTop:'18rem',
-                borderRadius:'10px',
-                width:'80%',
-                marginLeft:'0.5rem'
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+                color: 'white'
               }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                  color:'white'
-                }}
-              >
-                <img src={logo} style={{width:'30px',height:'30px'}}/>
-              </ListItemIcon>
-              <ListItemText primary={"Admin"} sx={{ opacity: open ? 1 : 0 }} />
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  lr: open ? 6 : 'none',
-                  marginTop:'5px',
-                  justifyContent: 'center',
-                  color:'white',
-                  display: open ?'block':'none',
+              <img src={logo} style={{ width: '30px', height: '30px' }} />
+            </ListItemIcon>
+            <ListItemText primary={"Admin"} sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                lr: open ? 6 : 'none',
+                marginTop: '5px',
+                justifyContent: 'center',
+                color: 'white',
+                display: open ? 'block' : 'none',
 
-                }}
-              >
-                <GroupIcon/>
-              </ListItemIcon>
-              
-            </ListItemButton>
+              }}
+            >
+              <GroupIcon />
+            </ListItemIcon>
+
+          </ListItemButton>
         </List>
-      
+
       </Drawer>
-      </Box>
-      <Box component="main" sx={{ color:'white',background: "#1A1D20",
-      color: "white",flexGrow:1,p:3}}>
-          <DrawerHeader/>
-          {props.component}
-      
-      </Box>
     </Box>
-  );
+    <Box component="main" sx={{
+      color: 'white', background: "#1A1D20",
+      color: "white", flexGrow: 1, p: 3
+    }}>
+      <DrawerHeader />
+      {props.component}
+
+    </Box>
+  </Box>
+);
 }

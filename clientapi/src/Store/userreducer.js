@@ -55,6 +55,20 @@ export const getWeather=createAsyncThunk(
         return res.json();
     }
 )
+export const addCity=createAsyncThunk(
+    'addCity',
+    async(data,thunkApi)=>{
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        
+        const res = await fetch('http://localhost:3001/addCity',requestOptions)
+        // console.log(res,"response")
+        return res.json();
+    }
+)
 
 export const userSlice=createSlice({
     name:'user',
@@ -96,6 +110,13 @@ export const userSlice=createSlice({
         },
         [getWeather.rejected]:(state,action)=>{
             console.log(state,"Got rejected from Getting Weather")
+        },
+        [addCity.fulfilled]:(state,action)=>{
+            console.log(action.payload,"City Added")
+            state.cities=action.payload.result.cities
+        },
+        [addCity.rejected]:(state,action)=>{
+            console.log(state,"City Added got rejected")
         }
         
     }

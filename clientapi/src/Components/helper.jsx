@@ -73,7 +73,7 @@ function OutlinedInput1(props) {
           <p style={props.style}> {props.label}</p>
           {props.style != undefined ?
             <>
-              <OutlinedInput style={styleret(props.style)} onChange={(e) => props.onChange(e)} name={props.name}></OutlinedInput>
+              <OutlinedInput style={styleret(props.style)} onChange={(e) => props.onChange(e)} name={props.name} placeholder={props.placeholder}></OutlinedInput>
             </>
             :
             <OutlinedInput style={styleret()}></OutlinedInput>
@@ -160,4 +160,4 @@ function LayoutStateForm(props) {
 
 
 
-export { OutlinedButton, FilledButton, LayoutStateForm };
+export { OutlinedButton, FilledButton, LayoutStateForm,OutlinedInput1 };
