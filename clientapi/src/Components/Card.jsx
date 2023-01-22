@@ -13,14 +13,16 @@ import Paper from '@mui/material/Paper';
 import ModalCard from './ModalCard'
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from "react-redux"
 
 function CurrentWeather(props) {
 	const temp = props.obj.temp
 	const description = props.obj.description
 	const city = props.obj.city
 	const iconId = props.obj.iconId
+	const cities = useSelector((state) => state.users.cities)
 
-	const card = ['1', '2', '3', '4', '5']
+	const card = cities
 
 	function temperatureClass() {
 		let temp = this.convertTemperature();
