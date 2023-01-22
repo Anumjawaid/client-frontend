@@ -91,8 +91,8 @@ export const userSlice=createSlice({
         [getWeather.fulfilled]:(state,action)=>{
             console.log(action.payload,"Weather of a city")
             state.responses=action.payload.message
-            state.currentCities=action.payload.weather
-            console.log(action.payload.weather)
+            state.currentCities=action.payload.data
+            console.log(state.currentCities)
         },
         [getWeather.rejected]:(state,action)=>{
             console.log(state,"Got rejected from Getting Weather")
