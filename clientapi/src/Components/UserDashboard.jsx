@@ -30,7 +30,7 @@ export default function UserDashboard() {
                 isLoggedIn != null ?
                     <>
                         <React.Fragment>
-                            <MiniDrawer component={<CurrentWeather obj={Current} />} />
+                            <MiniDrawer component={<CurrentWeather/>} />
                         </React.Fragment>
                     </>
                     :
