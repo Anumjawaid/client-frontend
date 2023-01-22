@@ -71,7 +71,7 @@ export default function Signup() {
         <>
         <Grid>
         <LayoutStateForm
-                step='step #01'
+                step='Signup'
                 b1={[{ "label1": "First Name", onChange: mapUser, value: userdata.fname, name: 'firstName' }, { "label2": "Last Name", onChange: (e) => mapUser(e), value: userdata.lname, name: 'lastName' }]}
                 b2={[{ "label": "Email", onChange: (e) => mapUser(e), value: userdata.email, name: 'email' }]}
                 b3={[{ "label": "Password", onChange: (e) => mapUser(e), value: userdata.password, name: 'password' }]}
