@@ -16,8 +16,8 @@ export default function Signup() {
     console.log(response, "response")
     useEffect(()=>{
         console.log("Useefeect runnning",response)
-        if (response == 0) {
-            navigate('/login')
+        if (response == "User Created") {
+            navigate('/udashboard')
         }
         else {
             console.log("nav not")

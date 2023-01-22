@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from '../Components/Login';
 import Signup from '../Components/Signup';
 import ProjectDashboard from '../Components/test';
+import UserDashboard from '../Components/UserDashboard';
 
 export default function AppRouter() {
     return (
@@ -19,6 +20,10 @@ export default function AppRouter() {
 
                 <Routes>
                     <Route path='/login' element={<Login />}></Route>
+                </Routes>
+
+                <Routes>
+                    <Route path='/udashboard' element={<UserDashboard />}></Route>
                 </Routes>
               
                
