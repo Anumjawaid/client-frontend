@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Box, Container, OutlinedInput } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { Link } from 'react-router-dom';
 
 
 
@@ -105,7 +106,15 @@ function LayoutStateForm(props) {
         <Box className='.glassmorphic-left' sx={styleret({ borderBottomLeftRadius: '20px', width: '30%', backgroundColor: '#3B4371', opacity: '0.9' })}>
           <Box className='' sx={{ borderTopRightRadius: '20px', borderBottomLeftRadius: '25px', width: '60%', backgroundColor: '#F3904F', marginLeft: '0px', position: 'relative', top: '-20px' }}>
 
-            <h1 style={{ marginLeft: '20px', padding: '10px' }}>{props.step}</h1>
+            <h1 style={{ margin: '20px', padding: '10px' }}>{props.step}</h1>
+
+
+          </Box>
+          <Box className='' sx={{  width: '90%', backgroundColor: '#transparent',color:'white', margin: '0 auto',position:'relative',top:'70px' }}>
+
+            <h3 style={{ margin: '0 auto', padding: '10px' }}>{props.steptag}</h3>
+            <Link to={props.link} style={{ margin: '70px', padding: '10px',color:'white' }}>{props.linkname} </Link>
+
 
           </Box>
 
@@ -115,20 +124,20 @@ function LayoutStateForm(props) {
             {props.b1 == undefined
               ?
               <>
-              
+
               </>
 
-            
+
               :
               <>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <OutlinedInput1 calls={'not'} label={props.b1[0].label1} onChange={props.b1[0].onChange} value={props.b1[0].value} name={props.b1[0].name} style={{ width: '100%' }} ></OutlinedInput1>
-                <OutlinedInput1 calls={'not'} label={props.b1[1].label2} onChange={props.b1[1].onChange} value={props.b1[1].value} name={props.b1[1].name} style={{ width: '100%', marginLeft: '2rem' }} ></OutlinedInput1>
+                  <OutlinedInput1 calls={'not'} label={props.b1[0].label1} onChange={props.b1[0].onChange} value={props.b1[0].value} name={props.b1[0].name} style={{ width: '100%' }} ></OutlinedInput1>
+                  <OutlinedInput1 calls={'not'} label={props.b1[1].label2} onChange={props.b1[1].onChange} value={props.b1[1].value} name={props.b1[1].name} style={{ width: '100%', marginLeft: '2rem' }} ></OutlinedInput1>
 
 
 
 
-              </Box>
+                </Box>
               </>
             }
             {props.b2 != undefined
@@ -160,4 +169,4 @@ function LayoutStateForm(props) {
 
 
 
-export { OutlinedButton, FilledButton, LayoutStateForm,OutlinedInput1 };
+export { OutlinedButton, FilledButton, LayoutStateForm, OutlinedInput1 };

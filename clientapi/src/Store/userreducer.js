@@ -11,6 +11,7 @@ const initialState={
     },
     cities:[],
     currentCities:{},
+    cityList:[],
     responses:"responses"
 
 }
@@ -92,6 +93,7 @@ export const userSlice=createSlice({
             state.userinfo=action.payload.result
             state.isLoggedIn=action.payload.result._id
             state.cities=action.payload.result.cities
+            state.cityList=action.payload.result.cityList
         },
         [readUser.rejected]:(state,action)=>{
             console.log(state,"Got rejected from Getting user in ADDUSER")
@@ -100,7 +102,10 @@ export const userSlice=createSlice({
         [readUser.fulfilled]:(state,action)=>{
             console.log(action.payload,"fullfilled from in GetUSER")
             state.responses=action.payload.message
-            state.isLoggedIn=action.payload.uid
+            state.userinfo=action.payload.result
+            state.isLoggedIn=action.payload.result._id
+            state.cities=action.payload.result.cities
+            state.cityList=action.payload.result.cityList
         },
         [getWeather.fulfilled]:(state,action)=>{
             console.log(action.payload,"Weather of a city")

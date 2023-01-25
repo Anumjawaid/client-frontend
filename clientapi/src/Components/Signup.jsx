@@ -6,6 +6,8 @@ import { Navigate, useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import { Grid, Modal } from '@mui/material'
 import { Box } from '@mui/system'
+import {io} from "socket.io-client";
+
 
 
 export default function Signup() {
@@ -17,7 +19,8 @@ export default function Signup() {
     console.log(response, "response")
     useEffect(()=>{
         console.log("Useefeect runnning",response)
-        if (response == 0) {
+        
+        if (response == "User Created") {
             navigate('/udashboard')
         }
         else {
@@ -48,22 +51,9 @@ export default function Signup() {
     }
 
     const RegisterUser = () => {
+        const socket = io.connect("http://localhost:3001");
         console.log("Register User", userdata)
         dispatch(addUser({ data: userdata }))
-        navigate('/udashboard')
-
-        //  *******************************This part doesnot work because of callback queue****************************
-
-        // setTimeout(()=>{
-        //     response=='Users Added Successfully' ?
-        //     navigate('/login')
-        //     :
-        //     console.log("Unable to login",response)
-        // },3000)
-        
-
-
-
     }
 
 
@@ -71,6 +61,9 @@ export default function Signup() {
         <>
         <Grid>
         <LayoutStateForm
+                steptag="Already a Member Login ?"
+                link='/login'
+                linkname='LOGIN'
                 step='Signup'
                 b1={[{ "label1": "First Name", onChange: mapUser, value: userdata.fname, name: 'firstName' }, { "label2": "Last Name", onChange: (e) => mapUser(e), value: userdata.lname, name: 'lastName' }]}
                 b2={[{ "label": "Email", onChange: (e) => mapUser(e), value: userdata.email, name: 'email' }]}
