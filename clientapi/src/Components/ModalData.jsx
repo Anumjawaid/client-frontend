@@ -1,5 +1,5 @@
 import React from 'react'
-import { add, addUser, readUser } from '../Store/userreducer'
+import { add, addUser, readUser ,currentCityChange} from '../Store/userreducer'
 import { LayoutStateForm } from './helper'
 import { useDispatch, useSelector } from "react-redux"
 import { Navigate, useNavigate } from 'react-router'
@@ -7,6 +7,8 @@ import { useEffect } from 'react'
 import { Grid, Modal } from '@mui/material'
 import { Box } from '@mui/system'
 import Typography from '@mui/material/Typography';
+import { FilledButton } from './helper';
+import { ChangeCircle } from '@mui/icons-material'
 
 
 
@@ -17,13 +19,20 @@ export default function SingleTemp() {
          
       
       };
-      
+      const navigate = useNavigate()
+
+      let change=()=>{
+        dispatch(currentCityChange())
+        navigate('/udashboard')
+      }
     const dispatch = useDispatch()
     const currentCities = useSelector((state) => state.users.currentCities)
     console.log(currentCities,'city')
     return (
         <>
             <Box sx={style}>
+			<FilledButton name={"BACK"} fn={() => change()} />
+
                 <Typography id="modal-modal-title" variant="h6" component="h2" style={{ textAlign: 'center' }}>
                     Your City's Descriptive Data
                 </Typography>

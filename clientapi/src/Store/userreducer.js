@@ -80,8 +80,17 @@ export const userSlice=createSlice({
             state.email=action.payload
         },
         socketUpdate:(state,action)=>{
+            console.log(action.payload)
             state.responses=action.payload.message
-            state.cities=action.payload.result.cities
+            state.display='block'
+            state.cities=action.payload.cities
+
+        },
+        displaySave:(state,action)=>{
+            state.display=action.payload.display
+        },
+        currentCityChange:(state,action)=>{
+            state.currentCities={}
         }
     },
     extraReducers:{
@@ -95,6 +104,7 @@ export const userSlice=createSlice({
         [addUser.fulfilled]:(state,action)=>{
             console.log(state,"fullfilled from in ADDUSER")
             state.responses=action.payload.message
+            state.display='block'
             state.userinfo=action.payload.result
             state.isLoggedIn=action.payload.result._id
             state.cities=action.payload.result.cities
@@ -107,6 +117,7 @@ export const userSlice=createSlice({
         [readUser.fulfilled]:(state,action)=>{
             console.log(action.payload,"fullfilled from in GetUSER")
             state.responses=action.payload.message
+            state.display='block'
             state.userinfo=action.payload.result
             state.isLoggedIn=action.payload.result._id
             state.cities=action.payload.result.cities
@@ -114,8 +125,8 @@ export const userSlice=createSlice({
         },
         [getWeather.fulfilled]:(state,action)=>{
             console.log(action.payload,"Weather of a city")
-            state.responses=action.payload.message
-            state.currentCities=action.payload.data
+            state.responses="full View"
+            state.currentCities=action.payload.result
             console.log(state.currentCities)
         },
         [getWeather.rejected]:(state,action)=>{
@@ -132,4 +143,4 @@ export const userSlice=createSlice({
     }
 })
 
-export const { add,socketUpdate } = userSlice.actions
+export const { add,socketUpdate,displaySave,currentCityChange } = userSlice.actions

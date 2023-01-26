@@ -36,13 +36,14 @@ export default function UserDashboard() {
     }, [])
     useEffect(()=>{
         socket.on(isLoggedIn,(msg)=>{
-            console.log("I am click 1",msg);
+            // console.log("I am click 1",msg.data);
+
             dispatch(socketUpdate({
-                message:"Updated Temprature Through Socket",
+                message:"Updated Temprature",
                 cities:msg.data
             })
             )
-            console.log("dispatch running")
+            // console.log("dispatch runningd",msg.data)
 
         })
     })
