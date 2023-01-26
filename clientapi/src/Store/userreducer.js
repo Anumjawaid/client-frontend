@@ -12,7 +12,8 @@ const initialState={
     cities:[],
     currentCities:{},
     cityList:[],
-    responses:"responses"
+    responses:"responses",
+    display:'none'
 
 }
 
@@ -77,6 +78,10 @@ export const userSlice=createSlice({
     reducers:{
         add:(state,action)=>{
             state.email=action.payload
+        },
+        socketUpdate:(state,action)=>{
+            state.responses=action.payload.message
+            state.cities=action.payload.result.cities
         }
     },
     extraReducers:{
@@ -127,4 +132,4 @@ export const userSlice=createSlice({
     }
 })
 
-export const { add } = userSlice.actions
+export const { add,socketUpdate } = userSlice.actions

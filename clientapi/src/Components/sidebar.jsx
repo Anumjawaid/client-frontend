@@ -153,7 +153,7 @@ return (
       }} variant="permanent" open={open} >
 
         <DrawerHeader>
-          <p style={{ position: 'absolute', left: '5%', fontWeight: 'bolder', fontSize: '21px' }}>Neptune</p>
+          <p style={{ position: 'absolute', left: '5%', fontWeight: 'bolder', fontSize: '21px' }}>Weather App</p>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (<img src={logo} style={{ width: '50px', height: '50px' }} />) : (<img src={logo} style={{ width: '50px', height: '50px' }} />)}
           </IconButton>

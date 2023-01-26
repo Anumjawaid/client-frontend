@@ -19,6 +19,7 @@ import { findByLabelText } from '@testing-library/react';
 import { FilledButton } from './helper';
 import { getWeather, addCity } from '../Store/userreducer'
 import { useNavigate } from 'react-router'
+import ToastCustom from './toast'
 import { OutlinedInput1 } from './helper';
 
 function CurrentWeather() {
@@ -55,7 +56,8 @@ function CurrentWeather() {
 	}
 
 	return (
-		<>
+		<> 
+		<ToastCustom/>
 			<Box >
 				<Box
 					component="form"
@@ -65,6 +67,7 @@ function CurrentWeather() {
 					noValidate
 					autoComplete="off"
 				>
+					
 					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }} >
 						<OutlinedInput1 calls={'not'} label={"Add City Here"} style={{ width: '100%', marginBottom: '20px', color: 'white' }} placeholder={"City Here"} onChange={(e) => setCityName(e.target.value)} name={CityName}>
 						</OutlinedInput1>

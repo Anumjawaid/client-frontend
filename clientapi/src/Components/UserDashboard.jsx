@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { Navigate, useNavigate } from 'react-router'
 import { useEffect } from 'react'
-import { add, addUser, readUser } from '../Store/userreducer'
+import { add, addUser, readUser,socketUpdate } from '../Store/userreducer'
 import MiniDrawer from './sidebar'
 import CurrentWeather from './Card'
+import Login from './Login'
+
 import { io } from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
@@ -32,6 +34,18 @@ export default function UserDashboard() {
 
 
     }, [])
+    useEffect(()=>{
+        socket.on(isLoggedIn,(msg)=>{
+            console.log("I am click 1",msg);
+            dispatch(socketUpdate({
+                message:"Updated Temprature Through Socket",
+                cities:msg.data
+            })
+            )
+            console.log("dispatch running")
+
+        })
+    })
 
     return (
         <>
@@ -45,6 +59,7 @@ export default function UserDashboard() {
                     :
                     <>
                         <h3>You First Need To Login</h3>
+                        <Login />
                     </>
             }
         </>
