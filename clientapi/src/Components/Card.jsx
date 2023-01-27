@@ -71,7 +71,10 @@ function CurrentWeather() {
 					<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', width: '100%' }} >
 						<OutlinedInput1 calls={'not'} label={"Add City Here"} style={{ width: '100%', marginBottom: '20px', color: 'white' }} placeholder={"City Here"} onChange={(e) => setCityName(e.target.value)} name={CityName}>
 						</OutlinedInput1>
-						<AddIcon style={{ marginTop: '40px' }} onClick={()=>console.log("DDddd")} />
+						{/* <AddIcon style={{ marginTop: '40px' }} onClick={} /> */}
+						<div style={{marginTop:'40px',marginLeft:'10px'}}>
+						<FilledButton style={{padding:"10px"}} name={"Add"} fn={() => dispatch(addCity({ data: { "_id": isLoggedIn, city: CityName } }))} />
+					</div>
 					</div>
 
 				</Box>
